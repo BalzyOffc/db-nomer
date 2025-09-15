@@ -27,7 +27,7 @@
     }
   ],
   "theme": {
-    "mode": "dark",
-    "customUrl": "https://files.catbox.moe/kyfci4.jpg"
+    "mode": "custom",
+    "customUrl": ""
   }
 }
