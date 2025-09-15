@@ -1,1 +1,31 @@
-[]
+{
+  "owners": [
+    {
+      "id": 1,
+      "email": "balzy@gmail.com"
+    },
+    {
+      "id": 2,
+      "email": "balstr32@gmail.com"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "user": "demo",
+      "whatsapp": "628111111111"
+    },
+    {
+      "id": 2,
+      "user": "balzy",
+      "whatsapp": "6285147026780"
+    }
+  ],
+  "codes": [
+    {
+      "id": 1,
+      "title": "Plugin Iqc",
+      "code": "const fetch = require('node-fetch')\n\nlet handler = async (m, { text, daftar, isRegistered, reply, conn }) => {\n    if (!text) return reply('gunakan: .iqc jam|batre|pesan\\ncontoh: .iqc 18:00|40|hai hai')\n    if (!isRegistered) return daftar(`kamu belum daftar, daftarlah agar bisa menggunakan fitur bot\\ncara daftar .daftar nama.umur\\nseperti ini balzy.10`)\n\n    let [time, battery, ...msg] = text.split('|')\n    if (!time || !battery || msg.length === 0) return reply('format salah! gunakan:\\n.iqc jam|batre|pesan\\nContoh:\\n.iqc 18:00|40|hai hai')\n\n    reply(mess.wait)\n\n    let messageText = encodeURIComponent(msg.join('|').trim())\n    let url = `https://brat.siputzx.my.id/iphone-quoted?time=${encodeURIComponent(time)}&batteryPercentage=${battery}&carrierName=BalzyDeveloper&messageText=${messageText}&emojiStyle=apple`\n\n    try {\n        let res = await fetch(url)\n        if (!res.ok) return reply('❌ Gagal mengambil data dari API.')\n\n        let buffer\n        if (typeof res.buffer === 'function') {\n            buffer = await res.buffer()\n        } else {\n            let arrayBuffer = await res.arrayBuffer()\n            buffer = Buffer.from(arrayBuffer)\n        }\n\n        await conn.sendMessage(m.chat, {\n            image: buffer,\n            caption: `✅ *Sukses!*\\nJam: ${time}\\nBatre: ${battery}%\\nPesan: ${msg.join(' ')}`\n        }, { quoted: m })\n\n    } catch (e) {\n        console.error(e)\n        reply('❌ Terjadi kesalahan saat menghubungi API.')\n    }\n}\n\nhandler.command = ['iqc']\nhandler.tags = ['fun']\nhandler.owner = false\n\nmodule.exports = handler"
+    }
+  ]
+}
