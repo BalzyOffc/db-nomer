@@ -27,7 +27,7 @@
     }
   ],
   "theme": {
-    "mode": "custom",
+    "mode": "light",
     "customUrl": ""
   }
 }
